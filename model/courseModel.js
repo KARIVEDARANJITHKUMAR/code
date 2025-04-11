@@ -36,4 +36,3 @@ const courseDetailSchema = new mongoose.Schema(courseSchema);
 const courseModel = mongoose.model("coursedetailsUpskill",courseDetailSchema);
 
 module.exports = courseModel
-

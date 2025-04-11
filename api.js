@@ -6,6 +6,8 @@ const {PORT,DB_USER,DB_PASSWORD} = process.env
 const router = require("./routes/authRouter");
 const app = express()
 app.use(express.json())
+const cors = require('cors');
+app.use(cors());
 
 const CourseRouter = require("./routes/courseRouter");
 
