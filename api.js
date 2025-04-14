@@ -7,7 +7,15 @@ const router = require("./routes/authRouter");
 const app = express()
 app.use(express.json())
 const cors = require('cors');
-app.use(cors());
+app.use(cors());const express = require("express");
+const path = require("path");
+const serveStatic = require("serve-static");
+
+
+app.use(serveStatic(path.join(__dirname, "build")));
+
+
+
 
 const CourseRouter = require("./routes/courseRouter");
 
