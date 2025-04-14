@@ -14,6 +14,19 @@ const serveStatic = require("serve-static");
 
 app.use(serveStatic(path.join(__dirname, "build")));
 
+const allowedOrigins = ['http://localhost:3000', 'https://code-production-7488.up.railway.app/'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 
 
 
