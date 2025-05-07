@@ -10,6 +10,8 @@ const {
 
 const CourseRouter = express.Router();
 
+
+
 CourseRouter.get("/", authenticate, getAllCourses);
 CourseRouter.get("/:elementId", authenticate, getCoursesById);
 CourseRouter.post("/", authenticate, postCourses);

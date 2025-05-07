@@ -1,25 +1,25 @@
 const  mongoose = require("mongoose")
 
 const courseDetailsSchema =({
-    dayNumber:{
+    day_number:{
         type:String,
         required:true
     },
-    videoLink:{
+    video_link:{
         type:String,
         required:true
     },
-    assignmentLink:{
+    assignment_link:{
         type:String
     }
 })
     
 const courseSchema = ({
-    courseName:{
+    course_name:{
         type:String,
         required:true
     },
-    courseDuration:{
+    course_duration:{
         type:String,
         required:true
     },
@@ -27,7 +27,7 @@ const courseSchema = ({
         type:String,
         required:true
     },
-    courseDetails:{
+    course_details:{
         type:[courseDetailsSchema]
     }
 })
