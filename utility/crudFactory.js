@@ -1,22 +1,49 @@
-const getAllFactory = function(ElementModel){
-    return async function (req,res) {
-        try{
-            const elementsDetails = await ElementModel.find()
-            if (elementsDetails.length == 0){
-                throw new Error("no elements found");
-            }
-            res.status(200).json({
-                status:"Success",
-                message:elementsDetails
-            })
-        }catch(e){
-            res.status(400).json({
-                status:"Failure",
-                message:e.message
-            })
-        }     
-    }
+// const getAllFactory = function(ElementModel){
+//     return async function (req,res) {
+//         try{
+//             const elementsDetails = await ElementModel.find()
+//             if (elementsDetails.length == 0){
+//                 throw new Error("no elements found");
+//             }
+//             res.status(200).json({
+//                 status:"Success",
+//                 message:elementsDetails
+//             })
+//         }catch(e){
+//             res.status(400).json({
+//                 status:"Failure",
+//                 message:e.message
+//             })
+//         }     
+//     }
+// }
+
+// const Course = require("../model/courseModel"); 
+
+const getAllFactory =  function(ElementModel){
+ return async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 3;
+
+  const skip = (page - 1) * limit;
+
+  try {
+    const courses = await ElementModel.find().skip(skip).limit(limit);
+    const total = await ElementModel.countDocuments();
+
+    res.status(200).json({
+      message: courses,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page,
+    });
+  } catch (err) {
+    console.error("Error fetching courses:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 }
+
+
 
 
 const getByIdFactory = function(ElementModel){
